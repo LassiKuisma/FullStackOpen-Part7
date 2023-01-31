@@ -16,6 +16,8 @@
 .env.test.local
 .env.production.local
 .eslintrc.js
+cypress.config.js
+cypress
 
 npm-debug.log*
 yarn-debug.log*
