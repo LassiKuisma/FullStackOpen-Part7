@@ -7,15 +7,18 @@ import UserForm from './components/UserForm'
 import Togglable from './components/Togglable'
 import BlogCreationForm from './components/BlogCreationForm'
 
+import { setNotification } from './reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
+
 const App = () => {
+  const dispatch = useDispatch()
+
   const [blogs, setBlogs] = useState([])
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const [user, setUser] = useState(null)
-
-  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
@@ -31,14 +34,7 @@ const App = () => {
   }, [])
 
   const showNotification = (message, type) => {
-    setNotification({
-      type: type,
-      message: message,
-    })
-
-    setTimeout(() => {
-      setNotification(null)
-    }, 5000)
+    dispatch(setNotification(message, type, 5))
   }
 
   const handleLogin = async (event) => {
@@ -160,7 +156,7 @@ const App = () => {
 
   return (
     <div>
-      <Notification notification={notification} />
+      <Notification />
       {user === null ? loginForm() : blogForm()}
     </div>
   )
