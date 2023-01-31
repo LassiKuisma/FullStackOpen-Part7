@@ -33,7 +33,6 @@ const notificationSlice = createSlice({
 
 export const setNotification = (message, type, duration) => {
   return async (dispatch) => {
-    // TODO: set notification type
     dispatch(setMessage({ message, type }))
     dispatch(clearTimer())
 
