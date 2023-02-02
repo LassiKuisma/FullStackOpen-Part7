@@ -14,7 +14,7 @@ const BlogForm = () => {
 
   const blogs = useSelector((state) => state.blogs)
 
-  const user = useSelector((state) => state.user.user)
+  const user = useSelector((state) => state.user)
   if (user === null) {
     return <div></div>
   }

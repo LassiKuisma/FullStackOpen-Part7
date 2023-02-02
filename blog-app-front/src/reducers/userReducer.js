@@ -1,29 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 import loginService from '../services/login'
 import blogService from '../services/blogs'
+import { setNotification } from './notificationReducer'
 
-const initialState = {
-  user: null,
-}
+const initialState = {}
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action) {
-      const user = action.payload
-      state.user = user
+    setUser(_state, action) {
+      return action.payload
     },
-    clearUser(state, _action) {
-      state.user = null
+    clearUser(_state, _action) {
+      return null
     },
   },
 })
 
 export const tryLogin = (username, password) => {
   return async (dispatch) => {
-    console.log('logging in...')
-
     try {
       const user = await loginService.login({
         username,
@@ -33,11 +29,10 @@ export const tryLogin = (username, password) => {
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
       blogService.setToken(user.token)
 
-      console.log('succesfully logged in')
       dispatch(setUser(user))
+      dispatch(setNotification(`Welcome ${user.name}`, 'green', 5))
     } catch (exception) {
-      console.error('Failed to log in!')
-      //setNotification('Wrong username or password', 'red', 5)
+      dispatch(setNotification('Wrong username or password', 'red', 5))
     }
   }
 }

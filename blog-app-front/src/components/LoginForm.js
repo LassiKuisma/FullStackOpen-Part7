@@ -4,7 +4,7 @@ import { tryLogin } from '../reducers/userReducer'
 const LoginForm = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector((state) => state.user.user)
+  const user = useSelector((state) => state.user)
   if (user !== null) {
     // already logged in
     return <div></div>
@@ -16,9 +16,7 @@ const LoginForm = () => {
     const username = event.target.username.value
     const password = event.target.password.value
 
-    console.log(`trying to log in with '${username}' / '${password}'`)
     dispatch(tryLogin(username, password))
-    // TODO: if login failed, show notification
 
     event.target.username.value = ''
     event.target.password.value = ''

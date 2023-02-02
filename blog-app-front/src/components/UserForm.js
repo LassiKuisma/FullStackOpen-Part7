@@ -5,7 +5,7 @@ import blogService from '../services/blogs'
 const UserForm = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector((state) => state.user.user)
+  const user = useSelector((state) => state.user)
   if (user === null) {
     return <div></div>
   }
