@@ -7,6 +7,7 @@ import BlogForm from './components/BlogForm'
 
 import { setUser } from './reducers/userReducer'
 import blogService from './services/blogs'
+import { initializeBlogs } from './reducers/blogReducer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -19,6 +20,10 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
+
+  useEffect(() => {
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   return (
     <div>
