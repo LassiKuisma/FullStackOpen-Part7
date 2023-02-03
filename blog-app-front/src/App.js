@@ -8,6 +8,8 @@ import BlogForm from './components/BlogForm'
 import { setUser } from './reducers/userReducer'
 import blogService from './services/blogs'
 import { initializeBlogs } from './reducers/blogReducer'
+import Users from './components/Users'
+import { loadUsers } from './reducers/usersReducer'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -23,6 +25,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeBlogs())
+    dispatch(loadUsers())
   }, [dispatch])
 
   return (
@@ -32,6 +35,7 @@ const App = () => {
       <h2>Blogs</h2>
       <UserForm />
       <BlogForm />
+      <Users />
     </div>
   )
 }
