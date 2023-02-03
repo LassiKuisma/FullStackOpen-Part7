@@ -17,13 +17,16 @@ const BlogCreationForm = ({ createBlog }) => {
     setBlogUrl(event.target.value)
   }
 
-  const addBlog = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
-    createBlog({
+
+    const newBlog = {
       title: blogTitle,
       author: blogAuthor,
       url: blogUrl,
-    })
+    }
+
+    createBlog(newBlog)
 
     setBlogTitle('')
     setBlogAuthor('')
@@ -33,7 +36,7 @@ const BlogCreationForm = ({ createBlog }) => {
   return (
     <div>
       <h2>Create new</h2>
-      <form onSubmit={addBlog}>
+      <form onSubmit={handleSubmit}>
         <ul>
           <li>
             Title:

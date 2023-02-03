@@ -1,13 +1,32 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteBlog, likeBlog } from '../reducers/blogReducer'
 
-const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
+const Blog = ({ blog }) => {
   const [visible, setVisible] = useState(false)
+
+  const dispatch = useDispatch()
+
+  const user = useSelector((state) => state.user)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
   const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
     setVisible(!visible)
+  }
+
+  const handleLike = () => {
+    dispatch(likeBlog(blog))
+  }
+
+  const handleRemove = () => {
+    const confirm = window.confirm(
+      `Remove blog ${blog.title} by ${blog.author}?`
+    )
+    if (confirm) {
+      dispatch(deleteBlog(blog))
+    }
   }
 
   const blogStyle = {
@@ -24,40 +43,17 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
     </div>
   )
 
-  const likeBlog = (event) => {
-    event.preventDefault()
-
-    updateBlog(blog.id, {
-      title: blog.title,
-      author: blog.author,
-      url: blog.url,
-      likes: blog.likes + 1,
-      user: blog.user,
-    })
-  }
-
-  const removeBlog = (event) => {
-    event.preventDefault()
-
-    const confirm = window.confirm(
-      `Remove blog ${blog.title} by ${blog.author}?`
-    )
-    if (confirm) {
-      deleteBlog(blog.id)
-    }
-  }
-
   const BlogExpanded = (props) => {
     const userCanRemove =
       blog.user !== undefined && user.username === blog.user.username
 
     const removeButton = userCanRemove ? (
-      <>
+      <div>
         <br />
-        <button onClick={removeBlog}>Remove</button>
-      </>
+        <button onClick={handleRemove}>Remove</button>
+      </div>
     ) : (
-      <></>
+      <div></div>
     )
 
     return (
@@ -66,10 +62,10 @@ const Blog = ({ blog, updateBlog, deleteBlog, user }) => {
         <br />
         {blog.url}
         <br />
-        likes {blog.likes} <button onClick={likeBlog}>Like</button>
+        likes {blog.likes} <button onClick={handleLike}>Like</button>
         <br />
         {blog.user !== undefined && blog.user.name}
-        {userCanRemove && removeButton}
+        {removeButton}
       </div>
     )
   }
