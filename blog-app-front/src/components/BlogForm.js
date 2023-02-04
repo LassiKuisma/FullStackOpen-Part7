@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import Blog from './Blog'
 import Togglable from './Togglable'
 import BlogCreationForm from './BlogCreationForm'
 import { addBlog } from '../reducers/blogReducer'
@@ -34,9 +34,15 @@ const BlogForm = () => {
         <BlogCreationForm createBlog={createBlog} />
       </Togglable>
       <br />
-      {blogsByLikes.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
-      ))}
+      <ul>
+        {blogsByLikes.map((blog) => (
+          <li key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>
+              {blog.title} {blog.author}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

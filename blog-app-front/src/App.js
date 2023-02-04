@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Users from './components/Users'
 import BlogsByUser from './components/BlogsByUser'
+import Blog from './components/Blog'
 
 import { tryLoginFromCache } from './reducers/loginReducer'
 import { initializeBlogs } from './reducers/blogReducer'
@@ -23,9 +24,16 @@ const App = () => {
   }, [dispatch])
 
   const users = useSelector((state) => state.users)
+  const userMatch = useMatch('/users/:id')
+  const user = userMatch
+    ? users.find((user) => user.id === userMatch.params.id)
+    : null
 
-  const match = useMatch('/users/:id')
-  const user = match ? users.find((user) => user.id === match.params.id) : null
+  const blogs = useSelector((state) => state.blogs)
+  const blogMatch = useMatch('/blogs/:id')
+  const blog = blogMatch
+    ? blogs.find((blog) => blog.id === blogMatch.params.id)
+    : null
 
   const padding = {
     padding: 5,
@@ -59,6 +67,7 @@ const App = () => {
         />
         <Route path="/users/:id" element={<BlogsByUser user={user} />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/blogs/:id" element={<Blog blog={blog} />} />
       </Routes>
     </div>
   )

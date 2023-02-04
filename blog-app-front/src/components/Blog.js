@@ -1,19 +1,14 @@
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteBlog, likeBlog } from '../reducers/blogReducer'
 
 const Blog = ({ blog }) => {
-  const [visible, setVisible] = useState(false)
-
   const dispatch = useDispatch()
 
   const user = useSelector((state) => state.login)
+  const isLoggedIn = user !== null && user !== undefined
 
-  const hideWhenVisible = { display: visible ? 'none' : '' }
-  const showWhenVisible = { display: visible ? '' : 'none' }
-
-  const toggleVisibility = () => {
-    setVisible(!visible)
+  if (!blog) {
+    return <div>Loading blog...</div>
   }
 
   const handleLike = () => {
@@ -29,59 +24,34 @@ const Blog = ({ blog }) => {
     }
   }
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
-  }
+  const removeButton = () => {
+    // user doesn't have id locally, so I have to resort to comparing usernames
+    const userCanRemove = isLoggedIn && user.username === blog.user.username
 
-  const BlogSummary = (props) => (
-    <div>
-      {blog.title} {blog.author} {props.children}
-    </div>
-  )
-
-  const BlogExpanded = (props) => {
-    const userCanRemove =
-      blog.user !== undefined && user.username === blog.user.username
-
-    const removeButton = userCanRemove ? (
+    return !userCanRemove ? (
+      <></>
+    ) : (
       <div>
         <br />
         <button onClick={handleRemove}>Remove</button>
       </div>
-    ) : (
-      <div></div>
-    )
-
-    return (
-      <div>
-        {blog.title} {blog.author} {props.children}
-        <br />
-        {blog.url}
-        <br />
-        likes {blog.likes} <button onClick={handleLike}>Like</button>
-        <br />
-        {blog.user !== undefined && blog.user.name}
-        {removeButton}
-      </div>
     )
   }
 
+  const likeButton = () =>
+    isLoggedIn ? <button onClick={handleLike}>Like</button> : <></>
+
   return (
-    <div style={blogStyle}>
-      <div style={hideWhenVisible} className="blogSummary">
-        <BlogSummary>
-          <button onClick={toggleVisibility}>View</button>
-        </BlogSummary>
+    <div>
+      <h2>
+        {blog.title} {blog.author}
+      </h2>
+      <a href={blog.url}>{blog.url}</a>
+      <div>
+        {blog.likes} likes {likeButton()}
       </div>
-      <div style={showWhenVisible} className="blogExpanded">
-        <BlogExpanded>
-          <button onClick={toggleVisibility}>Hide</button>
-        </BlogExpanded>
-      </div>
+      <div>Added by {blog.user.name}</div>
+      {removeButton()}
     </div>
   )
 }
