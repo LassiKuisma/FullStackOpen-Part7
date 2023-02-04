@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import blogService from '../services/blogs'
 import { setNotification } from './notificationReducer'
+import { loadUsers } from './usersReducer'
 
 const initialState = []
 
@@ -38,6 +39,9 @@ export const addBlog = (blog) => {
     const newBlog = await blogService.create(blog)
     dispatch(appendBlog(newBlog))
 
+    // update user stats
+    dispatch(loadUsers())
+
     dispatch(
       setNotification(
         `Added new blog ${blog.title} by ${blog.author}`,
@@ -58,6 +62,9 @@ export const likeBlog = (blog) => {
     const updated = await blogService.update(id, blogObject)
     dispatch(updateBlog(updated))
 
+    // update user stats
+    dispatch(loadUsers())
+
     dispatch(setNotification(`Liked blog ${blogObject.title}`, 'yellow', 5))
   }
 }
@@ -67,6 +74,9 @@ export const deleteBlog = (blog) => {
     const id = blog.id
     const _response = await blogService.deleteBlog(id)
     dispatch(removeBlog(blog))
+
+    // update user stats
+    dispatch(loadUsers())
 
     dispatch(setNotification(`Deleted blog ${blog.title}`, 'yellow', 5))
   }
