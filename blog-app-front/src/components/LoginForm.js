@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { tryLogin } from '../reducers/userReducer'
+import { tryLogin } from '../reducers/loginReducer'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.login)
   if (user !== null) {
     // already logged in
     return <div></div>

@@ -1,4 +1,4 @@
-const User = ({ user }) => {
+const BlogsByUser = ({ user }) => {
   if (!user) {
     return <div>Loading...</div>
   }
@@ -16,4 +16,4 @@ const User = ({ user }) => {
   )
 }
 
-export default User
+export default BlogsByUser

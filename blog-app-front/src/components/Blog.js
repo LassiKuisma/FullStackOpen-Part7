@@ -7,7 +7,7 @@ const Blog = ({ blog }) => {
 
   const dispatch = useDispatch()
 
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.login)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
   const showWhenVisible = { display: visible ? '' : 'none' }

@@ -5,8 +5,8 @@ import { setNotification } from './notificationReducer'
 
 const initialState = {}
 
-const userSlice = createSlice({
-  name: 'user',
+const loginSlice = createSlice({
+  name: 'login',
   initialState,
   reducers: {
     setUser(_state, action) {
@@ -37,5 +37,5 @@ export const tryLogin = (username, password) => {
   }
 }
 
-export const { setUser, clearUser } = userSlice.actions
-export default userSlice.reducer
+export const { setUser, clearUser } = loginSlice.actions
+export default loginSlice.reducer

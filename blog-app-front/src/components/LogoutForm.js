@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../reducers/userReducer'
+import { setUser } from '../reducers/loginReducer'
 import blogService from '../services/blogs'
 
-const UserForm = () => {
+const LogoutForm = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.login)
   if (user === null) {
     return <div></div>
   }
@@ -29,4 +29,4 @@ const UserForm = () => {
   )
 }
 
-export default UserForm
+export default LogoutForm

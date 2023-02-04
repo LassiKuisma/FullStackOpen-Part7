@@ -3,13 +3,13 @@ import { useEffect } from 'react'
 import { Routes, Route, Link, useMatch } from 'react-router-dom'
 
 import Notification from './components/Notification'
-import UserForm from './components/UserForm'
+import LogoutForm from './components/LogoutForm'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Users from './components/Users'
-import User from './components/User'
+import BlogsByUser from './components/BlogsByUser'
 
-import { setUser } from './reducers/userReducer'
+import { setUser } from './reducers/loginReducer'
 import { initializeBlogs } from './reducers/blogReducer'
 import { loadUsers } from './reducers/usersReducer'
 
@@ -55,7 +55,7 @@ const App = () => {
       <Notification />
 
       <LoginForm />
-      <UserForm />
+      <LogoutForm />
 
       <Routes>
         <Route
@@ -67,7 +67,7 @@ const App = () => {
             </div>
           }
         />
-        <Route path="/users/:id" element={<User user={user} />} />
+        <Route path="/users/:id" element={<BlogsByUser user={user} />} />
         <Route path="/users" element={<Users />} />
       </Routes>
     </div>
