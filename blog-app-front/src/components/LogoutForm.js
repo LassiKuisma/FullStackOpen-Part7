@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../reducers/loginReducer'
-import blogService from '../services/blogs'
+import { logOut } from '../reducers/loginReducer'
 
 const LogoutForm = () => {
   const dispatch = useDispatch()
@@ -13,10 +12,7 @@ const LogoutForm = () => {
   const handleLogout = async (event) => {
     event.preventDefault()
 
-    window.localStorage.removeItem('loggedBlogappUser')
-    blogService.setToken(null)
-
-    dispatch(setUser(null))
+    dispatch(logOut())
   }
 
   return (

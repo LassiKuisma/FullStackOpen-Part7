@@ -9,25 +9,15 @@ import BlogForm from './components/BlogForm'
 import Users from './components/Users'
 import BlogsByUser from './components/BlogsByUser'
 
-import { setUser } from './reducers/loginReducer'
+import { tryLoginFromCache } from './reducers/loginReducer'
 import { initializeBlogs } from './reducers/blogReducer'
 import { loadUsers } from './reducers/usersReducer'
-
-import blogService from './services/blogs'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      dispatch(setUser(user))
-      blogService.setToken(user.token)
-    }
-  }, [])
-
-  useEffect(() => {
+    dispatch(tryLoginFromCache())
     dispatch(initializeBlogs())
     dispatch(loadUsers())
   }, [dispatch])

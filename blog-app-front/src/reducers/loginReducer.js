@@ -37,5 +37,25 @@ export const tryLogin = (username, password) => {
   }
 }
 
+export const tryLoginFromCache = () => {
+  return async (dispatch) => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      dispatch(setUser(user))
+      blogService.setToken(user.token)
+    }
+  }
+}
+
+export const logOut = () => {
+  return async (dispatch) => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    blogService.setToken(null)
+
+    dispatch(setUser(null))
+  }
+}
+
 export const { setUser, clearUser } = loginSlice.actions
 export default loginSlice.reducer
