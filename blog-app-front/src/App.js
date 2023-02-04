@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Routes, Route, Link, useMatch } from 'react-router-dom'
+import { Routes, Route, useMatch } from 'react-router-dom'
 
 import Notification from './components/Notification'
-import LogoutForm from './components/LogoutForm'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Users from './components/Users'
 import BlogsByUser from './components/BlogsByUser'
 import Blog from './components/Blog'
+import Navigation from './components/Navigation'
 
 import { tryLoginFromCache } from './reducers/loginReducer'
 import { initializeBlogs } from './reducers/blogReducer'
@@ -35,25 +35,12 @@ const App = () => {
     ? blogs.find((blog) => blog.id === blogMatch.params.id)
     : null
 
-  const padding = {
-    padding: 5,
-  }
-
   return (
     <div>
-      <div>
-        <Link style={padding} to={'/'}>
-          Home
-        </Link>
-        <Link style={padding} to={'/users'}>
-          Users
-        </Link>
-      </div>
-
+      <Navigation />
       <Notification />
 
       <LoginForm />
-      <LogoutForm />
 
       <Routes>
         <Route

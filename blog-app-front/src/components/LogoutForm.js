@@ -6,7 +6,7 @@ const LogoutForm = () => {
 
   const user = useSelector((state) => state.login)
   if (user === null) {
-    return <div></div>
+    return <></>
   }
 
   const handleLogout = async (event) => {
@@ -16,12 +16,10 @@ const LogoutForm = () => {
   }
 
   return (
-    <div>
-      <p>
-        Logged in as {user.name}
-        <button onClick={handleLogout}>Log out</button>
-      </p>
-    </div>
+    <>
+      Logged in as {user.name}
+      <button onClick={handleLogout}>Log out</button>
+    </>
   )
 }
 
