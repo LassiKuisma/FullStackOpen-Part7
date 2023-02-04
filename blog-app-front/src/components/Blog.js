@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { deleteBlog, likeBlog } from '../reducers/blogReducer'
 
 const Blog = ({ blog }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const user = useSelector((state) => state.login)
   const isLoggedIn = user !== null && user !== undefined
@@ -21,6 +23,7 @@ const Blog = ({ blog }) => {
     )
     if (confirm) {
       dispatch(deleteBlog(blog))
+      navigate('/')
     }
   }
 
