@@ -3,7 +3,7 @@ import loginService from '../services/login'
 import blogService from '../services/blogs'
 import { setNotification } from './notificationReducer'
 
-const initialState = {}
+const initialState = null
 
 const loginSlice = createSlice({
   name: 'login',
