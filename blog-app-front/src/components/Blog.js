@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteBlog, likeBlog } from '../reducers/blogReducer'
+import { deleteBlog, likeBlog, addComment } from '../reducers/blogReducer'
 
 const Blog = ({ blog }) => {
   const dispatch = useDispatch()
@@ -44,6 +44,39 @@ const Blog = ({ blog }) => {
   const likeButton = () =>
     isLoggedIn ? <button onClick={handleLike}>Like</button> : <></>
 
+  const handleAddComment = (event) => {
+    event.preventDefault()
+
+    const comment = {
+      comment: event.target.comment.value,
+    }
+
+    dispatch(addComment(blog, comment))
+
+    event.target.comment.value = ''
+  }
+
+  const commentSection = () => {
+    if (!isLoggedIn) {
+      return <></>
+    }
+
+    return (
+      <div>
+        <h3>Comments</h3>
+        <form onSubmit={handleAddComment}>
+          <input type="text" name="comment" />
+          <button type="submit">Add comment</button>
+        </form>
+        <ul>
+          {blog.comments.map((comment) => (
+            <li key={comment.id}>{comment.text}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h2>
@@ -55,6 +88,7 @@ const Blog = ({ blog }) => {
       </div>
       <div>Added by {blog.user.name}</div>
       {removeButton()}
+      {commentSection()}
     </div>
   )
 }
