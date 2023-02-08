@@ -1,3 +1,4 @@
+import { Button, TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { tryLogin } from '../reducers/loginReducer'
 
@@ -28,16 +29,24 @@ const LoginForm = () => {
 
       <form onSubmit={handleLogin}>
         <div>
-          username
-          <input id="username" type="text" name="Username" />
+          <TextField
+            label="Username"
+            type="text"
+            id="username"
+            name="Username"
+          />
         </div>
         <div>
-          password
-          <input id="password" type="password" name="Password" />
+          <TextField
+            label="Password"
+            type="password"
+            id="password"
+            name="Password"
+          />
         </div>
-        <button id="login-button" type="submit">
-          login
-        </button>
+        <Button variant="outlined" id="login-button" type="submit">
+          Login
+        </Button>
       </form>
     </div>
   )

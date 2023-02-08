@@ -6,13 +6,16 @@ import App from './App'
 import createStore from './store'
 
 import './index.css'
+import { Container } from '@mui/material'
 
 const store = createStore()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <Router>
-      <App />
+      <Container>
+        <App />
+      </Container>
     </Router>
   </Provider>
 )

@@ -6,6 +6,16 @@ import Togglable from './Togglable'
 import BlogCreationForm from './BlogCreationForm'
 import { addBlog } from '../reducers/blogReducer'
 
+import {
+  TableContainer,
+  Paper,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+} from '@mui/material'
+
 const BlogForm = () => {
   const blogCreationFormRef = useRef()
 
@@ -35,15 +45,26 @@ const BlogForm = () => {
         <BlogCreationForm createBlog={createBlog} />
       </Togglable>
       <br />
-      <ul>
-        {blogsByLikes.map((blog) => (
-          <li key={blog.id}>
-            <Link to={`/blogs/${blog.id}`}>
-              {blog.title} {blog.author}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Blog title</TableCell>
+              <TableCell>Author</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {blogsByLikes.map((blog) => (
+              <TableRow key={blog.id}>
+                <TableCell>
+                  <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+                </TableCell>
+                <TableCell>{blog.author}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   )
 }

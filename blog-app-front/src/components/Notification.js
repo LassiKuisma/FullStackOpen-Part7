@@ -1,3 +1,4 @@
+import { Alert } from '@mui/material'
 import { useSelector } from 'react-redux'
 
 const Notification = () => {
@@ -7,10 +8,16 @@ const Notification = () => {
     return <div></div>
   }
 
-  const className =
-    type === 'green' ? 'ok' : type === 'yellow' ? 'alert' : 'error'
-
-  return <div className={className}>{message}</div>
+  switch (type) {
+    case 'green':
+      return <Alert severity="success">{message}</Alert>
+    case 'yellow':
+      return <Alert severity="info">{message}</Alert>
+    case 'red':
+      return <Alert severity="error">{message}</Alert>
+    default:
+      return <Alert severity="info">{message}</Alert>
+  }
 }
 
 export default Notification

@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { deleteBlog, likeBlog, addComment } from '../reducers/blogReducer'
 
+import { Button, Stack } from '@mui/material'
+
 const Blog = ({ blog }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -36,13 +38,26 @@ const Blog = ({ blog }) => {
     ) : (
       <div>
         <br />
-        <button onClick={handleRemove}>Remove</button>
+        <Button variant="outlined" color="error" onClick={handleRemove}>
+          Remove
+        </Button>
       </div>
     )
   }
 
   const likeButton = () =>
-    isLoggedIn ? <button onClick={handleLike}>Like</button> : <></>
+    isLoggedIn ? (
+      <Button
+        size="small"
+        variant="contained"
+        color="success"
+        onClick={handleLike}
+      >
+        Like
+      </Button>
+    ) : (
+      <></>
+    )
 
   const handleAddComment = (event) => {
     event.preventDefault()
@@ -79,15 +94,20 @@ const Blog = ({ blog }) => {
 
   return (
     <div>
-      <h2>
-        {blog.title} {blog.author}
-      </h2>
-      <a href={blog.url}>{blog.url}</a>
-      <div>
-        {blog.likes} likes {likeButton()}
-      </div>
-      <div>Added by {blog.user.name}</div>
-      {removeButton()}
+      <Stack spacing={1}>
+        <div>
+          <h1>{blog.title}</h1>
+          <h2>by {blog.author}</h2>
+        </div>
+        <div>
+          <a href={blog.url}>{blog.url}</a>
+        </div>
+        <div>
+          {blog.likes} likes {likeButton()}
+        </div>
+        <div>Added by {blog.user.name}</div>
+        {removeButton()}
+      </Stack>
       {commentSection()}
     </div>
   )
