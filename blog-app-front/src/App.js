@@ -43,15 +43,7 @@ const App = () => {
       <LoginForm />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <h2>Blogs</h2>
-              <BlogForm />
-            </div>
-          }
-        />
+        <Route path="/" element={<BlogForm />} />
         <Route path="/users/:id" element={<BlogsByUser user={user} />} />
         <Route path="/users" element={<Users />} />
         <Route path="/blogs/:id" element={<Blog blog={blog} />} />
