@@ -45,19 +45,24 @@ export const initializeBlogs = () => {
 
 export const addBlog = (blog) => {
   return async (dispatch) => {
-    const newBlog = await blogService.create(blog)
-    dispatch(appendBlog(newBlog))
+    try {
+      const newBlog = await blogService.create(blog)
 
-    // update user stats
-    dispatch(loadUsers())
+      dispatch(appendBlog(newBlog))
 
-    dispatch(
-      setNotification(
-        `Added new blog ${blog.title} by ${blog.author}`,
-        'green',
-        5
+      // update user stats
+      dispatch(loadUsers())
+
+      dispatch(
+        setNotification(
+          `Added new blog ${blog.title} by ${blog.author}`,
+          'green',
+          5
+        )
       )
-    )
+    } catch (exception) {
+      dispatch(setNotification('Failed to create blog', 'red', 5))
+    }
   }
 }
 
