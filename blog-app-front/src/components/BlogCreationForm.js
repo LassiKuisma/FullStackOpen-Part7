@@ -34,6 +34,11 @@ const BlogCreationForm = ({ createBlog }) => {
     setBlogUrl('')
   }
 
+  const margins = {
+    marginTop: '2px',
+    marginBottom: '2px',
+  }
+
   return (
     <div>
       <h2>Create new</h2>
@@ -45,6 +50,7 @@ const BlogCreationForm = ({ createBlog }) => {
             onChange={handleBlogTitleChange}
             id="input-blog-title"
             size="small"
+            style={margins}
           />
         </div>
         <div>
@@ -54,6 +60,7 @@ const BlogCreationForm = ({ createBlog }) => {
             onChange={handleBlogAuthorChange}
             id="input-blog-author"
             size="small"
+            style={margins}
           />
         </div>
         <div>
@@ -63,9 +70,15 @@ const BlogCreationForm = ({ createBlog }) => {
             onChange={handleBlogUrlChange}
             id="input-blog-url"
             size="small"
+            style={margins}
           />
         </div>
-        <Button id="create-blog" variant="contained" type="submit">
+        <Button
+          id="create-blog"
+          variant="contained"
+          type="submit"
+          style={margins}
+        >
           Create
         </Button>
       </form>
