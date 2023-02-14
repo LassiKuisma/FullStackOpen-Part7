@@ -14,7 +14,7 @@ const LogoutForm = () => {
 
   const user = useSelector((state) => state.login)
   if (user === null) {
-    return <></>
+    return <Div>Not logged in</Div>
   }
 
   const handleLogout = async (event) => {

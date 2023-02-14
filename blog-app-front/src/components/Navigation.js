@@ -1,16 +1,9 @@
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 import LogoutForm from './LogoutForm'
 import { AppBar, Button, IconButton, Toolbar } from '@mui/material'
 
 const Navigation = () => {
-  const user = useSelector((state) => state.login)
-
-  const loginStatus = () => {
-    return user === null ? <>Not logged in</> : <LogoutForm />
-  }
-
   return (
     <div>
       <AppBar position="static">
@@ -22,7 +15,7 @@ const Navigation = () => {
           <Button color="inherit" component={Link} to={'/users'}>
             Users
           </Button>
-          {loginStatus()}
+          <LogoutForm />
         </Toolbar>
       </AppBar>
     </div>
