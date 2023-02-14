@@ -23,6 +23,11 @@ const LoginForm = () => {
     event.target.password.value = ''
   }
 
+  const margins = {
+    marginTop: '5px',
+    marginBottom: '5px',
+  }
+
   return (
     <div>
       <h2>Log in to application</h2>
@@ -34,6 +39,7 @@ const LoginForm = () => {
             type="text"
             id="username"
             name="Username"
+            style={margins}
           />
         </div>
         <div>
@@ -42,9 +48,15 @@ const LoginForm = () => {
             type="password"
             id="password"
             name="Password"
+            style={margins}
           />
         </div>
-        <Button variant="outlined" id="login-button" type="submit">
+        <Button
+          variant="outlined"
+          id="login-button"
+          type="submit"
+          style={margins}
+        >
           Login
         </Button>
       </form>

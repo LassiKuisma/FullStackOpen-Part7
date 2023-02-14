@@ -1,7 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../reducers/loginReducer'
 
-import { Button } from '@mui/material'
+import { Button, styled } from '@mui/material'
+
+// make the text of div match buttons
+const Div = styled('div')(({ theme }) => ({
+  ...theme.typography.button,
+  padding: theme.spacing(1),
+}))
 
 const LogoutForm = () => {
   const dispatch = useDispatch()
@@ -19,12 +25,13 @@ const LogoutForm = () => {
 
   return (
     <>
-      <div>Logged in as {user.name}</div>
+      <Div>Logged in as {user.name}</Div>
       <Button
         size="small"
         variant="contained"
         color="error"
         onClick={handleLogout}
+        style={{ margin: '5px' }}
       >
         Log out
       </Button>

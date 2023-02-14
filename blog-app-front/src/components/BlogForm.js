@@ -14,7 +14,13 @@ import {
   TableRow,
   TableCell,
   TableHead,
+  styled,
 } from '@mui/material'
+
+const HeaderCell = styled(TableCell)({
+  fontWeight: 'bold',
+  backgroundColor: 'darkgray',
+})
 
 const BlogForm = () => {
   const blogCreationFormRef = useRef()
@@ -49,8 +55,8 @@ const BlogForm = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Blog title</TableCell>
-              <TableCell>Author</TableCell>
+              <HeaderCell>Blog title</HeaderCell>
+              <HeaderCell>Author</HeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
