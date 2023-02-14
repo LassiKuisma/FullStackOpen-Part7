@@ -19,7 +19,7 @@ const BlogsByUser = ({ user }) => {
     <div>
       <h2>{user.name}</h2>
       <TableContainer component={Paper}>
-        <Table>
+        <Table className="styled-table">
           <TableHead>
             <TableRow>
               <TableCell>Added blogs</TableCell>

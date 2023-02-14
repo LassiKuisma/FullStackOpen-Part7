@@ -14,13 +14,7 @@ import {
   TableRow,
   TableCell,
   TableHead,
-  styled,
 } from '@mui/material'
-
-const HeaderCell = styled(TableCell)({
-  fontWeight: 'bold',
-  backgroundColor: 'darkgray',
-})
 
 const BlogForm = () => {
   const blogCreationFormRef = useRef()
@@ -52,11 +46,11 @@ const BlogForm = () => {
       </Togglable>
       <br />
       <TableContainer component={Paper}>
-        <Table>
+        <Table className="styled-table">
           <TableHead>
             <TableRow>
-              <HeaderCell>Blog title</HeaderCell>
-              <HeaderCell>Author</HeaderCell>
+              <TableCell>Blog title</TableCell>
+              <TableCell>Author</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

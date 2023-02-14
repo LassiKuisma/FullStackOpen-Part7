@@ -27,3 +27,12 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+
+.styled-table > thead > tr > th {
+  font-weight: bold;
+  background: darkgray;
+}
+
+.styled-table > tbody > tr:nth-child(even) {
+  background: lightgray;
+}

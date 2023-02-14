@@ -22,7 +22,7 @@ const Users = () => {
     <div>
       <h2>Users</h2>
       <TableContainer component={Paper}>
-        <Table>
+        <Table className="styled-table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
